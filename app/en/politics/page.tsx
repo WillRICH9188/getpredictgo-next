@@ -27,6 +27,7 @@ const categories = [
 
 export default function PoliticsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
   return (
@@ -68,8 +69,9 @@ export default function PoliticsPage() {
               )}
             </div>
           </div>
-          <nav className="border-t border-slate-700/50 py-4 overflow-x-auto">
-            <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal">
+          <nav className="border-t border-slate-700/50 py-4 relative">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
               {categories.map((cat) => (
                 <a
                   key={cat.name}
@@ -85,6 +87,37 @@ export default function PoliticsPage() {
                 </a>
               ))}
             </div>
+
+            {/* Mobile Hamburger Menu */}
+            <div className="md:hidden flex items-center justify-between">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
+              >
+                ☰
+              </button>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            {mobileMenuOpen && (
+              <div className="md:hidden absolute left-0 right-0 top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-40 mx-4">
+                {categories.map((cat) => (
+                  <a
+                    key={cat.name}
+                    href={cat.href}
+                    className={`block px-4 py-3 text-sm transition-all ${
+                      cat.name === 'Politics'
+                        ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
+                        : 'text-slate-300 hover:bg-slate-700/50'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="mr-2">{cat.icon}</span>
+                    {cat.name}
+                  </a>
+                ))}
+              </div>
+            )}
           </nav>
         </div>
       </header>
