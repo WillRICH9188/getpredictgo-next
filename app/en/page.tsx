@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 const t = {
   title: 'Understand what the world is predicting.',
   subtitle: 'Neutral data and analysis on global prediction markets — odds, hit rates, and trends, explained.',
@@ -50,6 +54,7 @@ const sampleArticles = [
 ];
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Header with Navigation */}
@@ -60,7 +65,8 @@ export default function Home() {
             <a href="/en" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </a>
-            <div className="flex gap-2">
+            {/* Desktop Language Buttons */}
+            <div className="hidden md:flex gap-2">
               {languages.map((lang) => (
                 <a
                   key={lang.code}
@@ -76,7 +82,36 @@ export default function Home() {
                 </a>
               ))}
             </div>
+            {/* Mobile Hamburger Menu */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 text-white hover:bg-slate-800/50 rounded-lg transition-all"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Language Menu */}
+          {menuOpen && (
+            <div className="md:hidden flex flex-col gap-2 pb-4 border-t border-slate-700/50 pt-4">
+              {languages.map((lang) => (
+                <a
+                  key={lang.code}
+                  href={`/${lang.code}`}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    lang.code === 'en'
+                      ? 'bg-blue-500/20 border border-blue-400/50 text-blue-300'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="mr-1">{lang.flag}</span>
+                  {lang.name}
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-4 overflow-x-auto">

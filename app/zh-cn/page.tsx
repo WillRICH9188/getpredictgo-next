@@ -1,9 +1,13 @@
+'use client';
+
+import { useState } from 'react';
+
 const t = {
-  title: '看懂全世界正在預測什麼。',
-  subtitle: '中立解讀全球預測市場——勝率、命中率、趨勢，用數據說話。',
-  cta: '加入 Telegram 頻道',
-  latest: '最新洞見',
-  readmore: '閱讀更多',
+  title: '看懂全世界正在预测什么。',
+  subtitle: '中立解读全球预测市场——胜率、命中率、趋势，用数据说话。',
+  cta: '加入 Telegram 频道',
+  latest: '最新洞见',
+  readmore: '阅读更多',
 };
 
 const languages = [
@@ -13,43 +17,44 @@ const languages = [
 ];
 
 const categories = [
-  { name: '基礎知識', href: '/zh-cn/basics', icon: '📚' },
-  { name: '如何參與', href: '/zh-cn/how-to', icon: '🎮' },
-  { name: '體育', href: '/zh-cn/sports', icon: '⚽' },
+  { name: '基础知识', href: '/zh-cn/basics', icon: '📚' },
+  { name: '如何参与', href: '/zh-cn/how-to', icon: '🎮' },
+  { name: '体育', href: '/zh-cn/sports', icon: '⚽' },
   { name: '政治', href: '/zh-cn/politics', icon: '🏛️' },
   { name: '金融', href: '/zh-cn/finance', icon: '💰' },
-  { name: '趨勢數據', href: '/zh-cn/data', icon: '📊' },
+  { name: '趋势数据', href: '/zh-cn/data', icon: '📊' },
   { name: '其他', href: '/zh-cn/other', icon: '🔍' },
 ];
 
 const sampleArticles = [
   {
     id: 1,
-    title: '比特幣價格預測：2026 年市場預期',
-    description: '加密貨幣預測市場分析顯示比特幣在未來一年的價格軌跡預期。',
+    title: '比特币价格预测：2026 年市场预期',
+    description: '加密货币预测市场分析显示比特币在未来一年的价格轨迹预期。',
     category: '金融',
     categoryColor: 'bg-amber-500/20 text-amber-300',
     image: '💰',
   },
   {
     id: 2,
-    title: '2026 美國大選：初期賠率和市場洞察',
-    description: '全面分析預測市場對即將舉行的總統大選的賠率。',
+    title: '2026 美国大选：初期赔率和市场洞察',
+    description: '全面分析预测市场对即将举行的总统大选的赔率。',
     category: '政治',
     categoryColor: 'bg-red-500/20 text-red-300',
     image: '🏛️',
   },
   {
     id: 3,
-    title: '阿根廷能再次贏得世界盃嗎？',
-    description: '體育預測市場分析阿根廷在即將舉行的錦標賽中的機會。',
-    category: '體育',
+    title: '阿根廷能再次赢得世界杯吗？',
+    description: '体育预测市场分析阿根廷在即将举行的锦标赛中的机会。',
+    category: '体育',
     categoryColor: 'bg-blue-500/20 text-blue-300',
     image: '⚽',
   },
 ];
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Header with Navigation */}
@@ -60,7 +65,8 @@ export default function Home() {
             <a href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </a>
-            <div className="flex gap-2">
+            {/* Desktop Language Buttons */}
+            <div className="hidden md:flex gap-2">
               {languages.map((lang) => (
                 <a
                   key={lang.code}
@@ -76,7 +82,36 @@ export default function Home() {
                 </a>
               ))}
             </div>
+            {/* Mobile Hamburger Menu */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 text-white hover:bg-slate-800/50 rounded-lg transition-all"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Language Menu */}
+          {menuOpen && (
+            <div className="md:hidden flex flex-col gap-2 pb-4 border-t border-slate-700/50 pt-4">
+              {languages.map((lang) => (
+                <a
+                  key={lang.code}
+                  href={`/${lang.code}`}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    lang.code === 'zh-cn'
+                      ? 'bg-blue-500/20 border border-blue-400/50 text-blue-300'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="mr-1">{lang.flag}</span>
+                  {lang.name}
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-4 overflow-x-auto">
