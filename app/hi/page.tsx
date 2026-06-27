@@ -63,7 +63,7 @@ export default function Home() {
 
             {/* CTA Button */}
             <a
-              href="https://t.me/PredictGo"
+              href="https://t.me/getpredictgo"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50 transform hover:-translate-y-1"
@@ -99,7 +99,7 @@ export default function Home() {
               <p>&copy; 2026 Predict Go. All rights reserved.</p>
             </div>
             <div className="flex gap-6 text-slate-400 text-sm">
-              <a href="https://t.me/PredictGo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
+              <a href="https://t.me/getpredictgo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
                 Telegram
               </a>
               <span>•</span>
