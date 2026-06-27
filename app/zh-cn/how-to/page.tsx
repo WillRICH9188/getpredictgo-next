@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const t = {
@@ -29,6 +29,16 @@ export default function HowToPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'zh-cn');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -69,9 +79,10 @@ export default function HowToPage() {
               )}
             </div>
           </div>
+          {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-4 relative">
-            {/* Desktop Navigation - hidden on mobile */}
-            <div className="hidden md:block">
+            {/* Desktop Navigation */}
+            {!isMobile && (
               <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
                 {categories.map((cat) => (
                   <a
@@ -88,37 +99,39 @@ export default function HowToPage() {
                   </a>
                 ))}
               </div>
-            </div>
+            )}
 
             {/* Mobile Hamburger Menu */}
-            <div className="md:hidden block">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
-              >
-                ☰
-              </button>
-            </div>
+            {isMobile && (
+              <>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
+                >
+                  ☰
+                </button>
 
-            {/* Mobile Menu Dropdown */}
-            {mobileMenuOpen && (
-              <div className="md:hidden absolute left-0 right-0 top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-40 mx-4">
-                {categories.map((cat) => (
-                  <a
-                    key={cat.name}
-                    href={cat.href}
-                    className={`block px-4 py-3 text-sm transition-all ${
-                      cat.name === '如何参与'
-                        ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
-                        : 'text-slate-300 hover:bg-slate-700/50'
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="mr-2">{cat.icon}</span>
-                    {cat.name}
-                  </a>
-                ))}
-              </div>
+                {/* Mobile Menu Dropdown */}
+                {mobileMenuOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-40 mx-4">
+                    {categories.map((cat) => (
+                      <a
+                        key={cat.name}
+                        href={cat.href}
+                        className={`block px-4 py-3 text-sm transition-all ${
+                          cat.name === '如何参与'
+                            ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
+                            : 'text-slate-300 hover:bg-slate-700/50'
+                        }`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <span className="mr-2">{cat.icon}</span>
+                        {cat.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </nav>
         </div>
