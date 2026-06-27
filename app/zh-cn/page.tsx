@@ -54,7 +54,8 @@ const sampleArticles = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const currentLang = languages.find(l => l.code === 'zh-cn');
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Header with Navigation */}
@@ -65,53 +66,40 @@ export default function Home() {
             <a href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </a>
-            {/* Desktop Language Buttons */}
-            <div className="hidden md:flex gap-2">
-              {languages.map((lang) => (
-                <a
-                  key={lang.code}
-                  href={`/${lang.code}`}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                    lang.code === 'zh-cn'
-                      ? 'bg-blue-500/20 border border-blue-400/50 text-blue-300'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-                  }`}
-                >
-                  <span className="mr-1">{lang.flag}</span>
-                  {lang.name}
-                </a>
-              ))}
-            </div>
-            {/* Mobile Hamburger Menu */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 text-white hover:bg-slate-800/50 rounded-lg transition-all"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+            {/* Language Selector - Button + Dropdown Panel */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="px-3 py-2 rounded-lg text-sm font-medium transition-all bg-blue-500/20 border border-blue-400/50 text-blue-300 hover:bg-blue-500/30 flex items-center gap-2"
+              >
+                <span>{currentLang?.flag}</span>
+                <span>{currentLang?.name}</span>
+                <svg className={`w-4 h-4 transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </button>
 
-          {/* Mobile Language Menu */}
-          {menuOpen && (
-            <div className="md:hidden flex flex-col gap-2 pb-4 border-t border-slate-700/50 pt-4">
-              {languages.map((lang) => (
-                <a
-                  key={lang.code}
-                  href={`/${lang.code}`}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                    lang.code === 'zh-cn'
-                      ? 'bg-blue-500/20 border border-blue-400/50 text-blue-300'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-                  }`}
-                >
-                  <span className="mr-1">{lang.flag}</span>
-                  {lang.name}
-                </a>
-              ))}
+              {/* Dropdown Panel */}
+              {langMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-10">
+                  {languages.map((lang) => (
+                    <a
+                      key={lang.code}
+                      href={`/${lang.code}`}
+                      className={`block px-4 py-2 text-sm transition-all ${
+                        lang.code === 'zh-cn'
+                          ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
+                          : 'text-slate-300 hover:bg-slate-700/50'
+                      }`}
+                    >
+                      <span className="mr-2">{lang.flag}</span>
+                      {lang.name}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-4 overflow-x-auto">
