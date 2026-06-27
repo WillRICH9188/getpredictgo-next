@@ -70,26 +70,28 @@ export default function PoliticsPage() {
             </div>
           </div>
           <nav className="border-t border-slate-700/50 py-4 relative">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
-              {categories.map((cat) => (
-                <a
-                  key={cat.name}
-                  href={cat.href}
-                  className={`transition-colors font-medium ${
-                    cat.name === 'Politics'
-                      ? 'text-blue-400'
-                      : 'text-slate-300 hover:text-blue-400'
-                  }`}
-                >
-                  <span className="mr-2">{cat.icon}</span>
-                  {cat.name}
-                </a>
-              ))}
+            {/* Desktop Navigation - hidden on mobile */}
+            <div className="hidden md:block">
+              <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
+                {categories.map((cat) => (
+                  <a
+                    key={cat.name}
+                    href={cat.href}
+                    className={`transition-colors font-medium ${
+                      cat.name === 'Politics'
+                        ? 'text-blue-400'
+                        : 'text-slate-300 hover:text-blue-400'
+                    }`}
+                  >
+                    <span className="mr-2">{cat.icon}</span>
+                    {cat.name}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* Mobile Hamburger Menu */}
-            <div className="md:hidden flex items-center justify-between">
+            <div className="md:hidden block">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
