@@ -90,7 +90,7 @@ export default function FinancePage() {
               </div>
 
               {/* Fade effect on right side to indicate scrollable content */}
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-950/90 to-transparent pointer-events-none md:hidden"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-950 via-slate-950/70 to-transparent pointer-events-none md:hidden"></div>
             </div>
           </nav>
         </div>
