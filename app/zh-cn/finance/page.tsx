@@ -89,8 +89,8 @@ export default function FinancePage() {
                 ))}
               </div>
 
-              {/* Scrollable indicator - show chevron on mobile */}
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-400 text-xl pointer-events-none md:hidden animate-pulse">›</div>
+              {/* Scrollable indicator - always show on all devices */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none animate-pulse">›</div>
               <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-950 via-slate-950/70 to-transparent pointer-events-none md:hidden"></div>
             </div>
           </nav>
