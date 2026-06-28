@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
 const t = {
@@ -27,27 +27,19 @@ const categories = [
 
 export default function HowToPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+      {/* Header with Navigation */}
       <header className="sticky top-0 z-50 border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Top Bar */}
           <div className="py-4 flex justify-between items-center">
             <Link href="/en" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </Link>
+            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
@@ -59,6 +51,7 @@ export default function HowToPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </button>
+
               {langMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-10">
                   {languages.map((lang) => (
@@ -79,11 +72,12 @@ export default function HowToPage() {
               )}
             </div>
           </div>
-          {/* Category Navigation */}
+
+          {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-4 relative">
-            {/* Desktop Navigation */}
-            {!isMobile && (
-              <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
+            <div className="relative overflow-hidden">
+              {/* Navigation scroll container with fade effect */}
+              <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto">
                 {categories.map((cat) => (
                   <a
                     key={cat.name}
@@ -99,44 +93,15 @@ export default function HowToPage() {
                   </a>
                 ))}
               </div>
-            )}
 
-            {/* Mobile Hamburger Menu */}
-            {isMobile && (
-              <>
-                <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
-                >
-                  ☰
-                </button>
-
-                {/* Mobile Menu Dropdown */}
-                {mobileMenuOpen && (
-                  <div className="absolute left-0 right-0 top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-40 mx-4">
-                    {categories.map((cat) => (
-                      <a
-                        key={cat.name}
-                        href={cat.href}
-                        className={`block px-4 py-3 text-sm transition-all ${
-                          cat.name === 'How to Play'
-                            ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
-                            : 'text-slate-300 hover:bg-slate-700/50'
-                        }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <span className="mr-2">{cat.icon}</span>
-                        {cat.name}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+              {/* Fade effect on right side to indicate scrollable content */}
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-950/90 to-transparent pointer-events-none md:hidden"></div>
+            </div>
           </nav>
         </div>
       </header>
 
+      {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/en" className="hover:text-blue-400 transition-colors">Home</Link>
@@ -145,59 +110,69 @@ export default function HowToPage() {
         </div>
       </div>
 
+      {/* Hero Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-slate-900 via-blue-950/20 to-slate-950 border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <div className="flex justify-center mb-8">
             <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
           </div>
+
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
               {t.title}
             </span>
           </h1>
+
           <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             {t.description}
           </p>
         </div>
       </section>
 
+      {/* Content Section */}
       <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-6 w-full flex-1">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">{t.subtitle}</h2>
           <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
         </div>
 
-        <div className="space-y-8">
+        {/* Content Placeholder */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">🚀 Getting Started</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
+            <div className="text-4xl mb-4">🚀</div>
+            <h3 className="text-xl font-bold mb-3">Getting Started</h3>
+            <p className="text-slate-300 leading-relaxed">
               Create your account, verify your identity, and make your first deposit. Follow our comprehensive guide to set up your prediction market portfolio.
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">📈 Placing Your First Trade</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
+            <div className="text-4xl mb-4">📈</div>
+            <h3 className="text-xl font-bold mb-3">Placing Your First Trade</h3>
+            <p className="text-slate-300 leading-relaxed">
               Learn how to select markets, analyze probabilities, and place your first prediction with confidence.
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">💼 Portfolio Management</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
+            <div className="text-4xl mb-4">💼</div>
+            <h3 className="text-xl font-bold mb-3">Portfolio Management</h3>
+            <p className="text-slate-300 leading-relaxed">
               Track your positions, manage risk, and optimize your prediction portfolio for long-term success.
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">🎓 Advanced Strategies</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
+            <div className="text-4xl mb-4">🎓</div>
+            <h3 className="text-xl font-bold mb-3">Advanced Strategies</h3>
+            <p className="text-slate-300 leading-relaxed">
               Discover professional techniques used by experienced predictors to maximize returns and minimize risk.
             </p>
           </div>
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="border-t border-slate-700/50 bg-slate-950/50 px-4 md:px-6 py-8 md:py-12 mt-16">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">

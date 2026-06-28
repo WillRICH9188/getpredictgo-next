@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
 const t = {
@@ -27,18 +27,7 @@ const categories = [
 
 export default function SportsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'zh-cn');
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -79,11 +68,11 @@ export default function SportsPage() {
               )}
             </div>
           </div>
-          {/* Category Navigation */}
+          {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-4 relative">
-            {/* Desktop Navigation */}
-            {!isMobile && (
-              <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
+            <div className="relative overflow-hidden">
+              {/* Navigation scroll container with fade effect */}
+              <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto">
                 {categories.map((cat) => (
                   <a
                     key={cat.name}
@@ -99,40 +88,10 @@ export default function SportsPage() {
                   </a>
                 ))}
               </div>
-            )}
 
-            {/* Mobile Hamburger Menu */}
-            {isMobile && (
-              <>
-                <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="px-3 py-2 rounded-lg text-xl font-semibold transition-all text-blue-300 hover:text-blue-200"
-                >
-                  ☰
-                </button>
-
-                {/* Mobile Menu Dropdown */}
-                {mobileMenuOpen && (
-                  <div className="absolute left-0 right-0 top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-40 mx-4">
-                    {categories.map((cat) => (
-                      <a
-                        key={cat.name}
-                        href={cat.href}
-                        className={`block px-4 py-3 text-sm transition-all ${
-                          cat.name === '体育'
-                            ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
-                            : 'text-slate-300 hover:bg-slate-700/50'
-                        }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <span className="mr-2">{cat.icon}</span>
-                        {cat.name}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+              {/* Fade effect on right side to indicate scrollable content */}
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-950/90 to-transparent pointer-events-none md:hidden"></div>
+            </div>
           </nav>
         </div>
       </header>
