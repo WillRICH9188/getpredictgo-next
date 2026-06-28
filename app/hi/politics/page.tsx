@@ -89,7 +89,8 @@ export default function PoliticsPage() {
                 ))}
               </div>
 
-              {/* Fade effect on right side to indicate scrollable content */}
+              {/* Scrollable indicator - show chevron on mobile */
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-400 text-xl pointer-events-none md:hidden animate-pulse">›</div>
               <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-950 via-slate-950/70 to-transparent pointer-events-none md:hidden"></div>
             </div>
           </nav>
