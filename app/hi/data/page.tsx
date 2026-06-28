@@ -70,7 +70,7 @@ export default function DataPage() {
           </div>
           {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-4 relative">
-            <div className="relative overflow-hidden">
+            <div className="relative">
               {/* Navigation scroll container with fade effect */}
               <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto">
                 {categories.map((cat) => (
