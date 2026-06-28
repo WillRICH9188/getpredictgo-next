@@ -89,7 +89,7 @@ export default function HowToPage() {
             </div>
 
             {/* Scrollable indicator - always show on all devices */}
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none animate-pulse">›</div>
+            <div style={{position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#60a5fa', fontSize: '24px', pointerEvents: 'none', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'}}>›</div>
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-950 via-slate-950/70 to-transparent pointer-events-none md:hidden"></div>
           </nav>
         </div>
