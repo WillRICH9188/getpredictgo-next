@@ -89,7 +89,7 @@ export default function BasicsPage() {
                 ))}
               </div>
 
-              {/* Scrollable indicator - show chevron on mobile */}
+              {/* Scrollable indicator - show chevron on mobile */}}
               <div className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-400 text-xl pointer-events-none md:hidden animate-pulse">›</div>
             </div>
           </nav>
