@@ -2,15 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { getArticles } from '@/lib/articles';
-
-const t = {
-  title: '基础知识',
-  description: '理解预测市场、赔率和全球预测如何运作的基础。',
-  subtitle: '学习基础知识',
-};
-
-const articles = getArticles('zh-cn', 'basics');
+import { getArticle, getArticles } from '@/lib/articles';
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -28,9 +20,24 @@ const categories = [
   { name: '其他', href: '/zh-cn/other', icon: '🔍' },
 ];
 
-export default function BasicsPage() {
+export default function ArticlePage({ params }: { params: { articleId: string } }) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const article = getArticle('zh-cn', 'basics', params.articleId);
   const currentLang = languages.find(l => l.code === 'zh-cn');
+  const allArticles = getArticles('zh-cn', 'basics');
+
+  if (!article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">文章未找到</h1>
+          <Link href="/zh-cn/basics" className="text-blue-400 hover:text-blue-300">
+            返回分类
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -56,7 +63,7 @@ export default function BasicsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/basics`}
+                      href={`/${lang.code}/basics/${params.articleId}`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'zh-cn'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -71,14 +78,10 @@ export default function BasicsPage() {
               )}
             </div>
           </div>
-          {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
-            {/* Left arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❮
             </div>
-
-            {/* Scrollable navigation area - flex-1 fills middle space */}
             <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-2">
               {categories.map((cat) => (
                 <a
@@ -96,8 +99,6 @@ export default function BasicsPage() {
               ))}
               <div className="flex-shrink-0 w-8"></div>
             </div>
-
-            {/* Right arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❯
             </div>
@@ -105,50 +106,45 @@ export default function BasicsPage() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 py-6 w-full">
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/zh-cn" className="hover:text-blue-400 transition-colors">首页</Link>
           <span>/</span>
-          <span className="text-blue-400">基础知识</span>
+          <Link href="/zh-cn/basics" className="hover:text-blue-400 transition-colors">基础知识</Link>
+          <span>/</span>
+          <span className="text-blue-400">{article.title}</span>
         </div>
       </div>
 
-      <section className="py-16 md:py-24 bg-gradient-to-b from-slate-900 via-blue-950/20 to-slate-950 border-b border-slate-700/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-          <div className="flex justify-center mb-8">
-            <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+      <section className="py-12 md:py-16 max-w-4xl mx-auto px-4 md:px-6 w-full flex-1">
+        <div className="mb-8">
+          <div className="text-5xl mb-6">{article.icon}</div>
+          <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
-              {t.title}
+              {article.title}
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            {t.description}
-          </p>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-6 w-full flex-1">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">{t.subtitle}</h2>
-          <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
+          <p className="text-lg text-slate-300 mb-8">{article.description}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {articles.map((article) => (
-            <Link
-              key={article.id}
-              href={`/zh-cn/basics/${article.id}`}
-              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
-            >
-              <div className="text-4xl mb-4">{article.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
-              <p className="text-slate-300 leading-relaxed">
-                {article.description}
-              </p>
-            </Link>
-          ))}
+        <div className="prose prose-invert max-w-none mb-12">
+          <div dangerouslySetInnerHTML={{ __html: article.content }} className="text-slate-200 leading-relaxed" />
+        </div>
+
+        <div className="border-t border-slate-700/50 pt-8 mt-12">
+          <h3 className="text-2xl font-bold mb-6">其他文章</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {allArticles.filter(a => a.id !== article.id).slice(0, 3).map((otherArticle) => (
+              <Link
+                key={otherArticle.id}
+                href={`/zh-cn/basics/${otherArticle.id}`}
+                className="bg-gradient-to-br from-slate-800/30 to-slate-900/30 border border-slate-700/30 rounded-lg p-6 hover:border-blue-500/50 transition-all hover:bg-slate-800/50"
+              >
+                <div className="text-3xl mb-3">{otherArticle.icon}</div>
+                <h4 className="font-bold text-blue-300 hover:text-blue-200">{otherArticle.title}</h4>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
