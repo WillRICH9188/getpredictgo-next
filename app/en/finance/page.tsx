@@ -76,7 +76,8 @@ export default function FinancePage() {
             </div>
 
             {/* Scrollable navigation area - flex-1 fills middle space */}
-            <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 justify-center px-4">
+            <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-4">
+              <div className="flex-shrink-0 w-20"></div>
               {categories.map((cat) => (
                 <a
                   key={cat.name}
@@ -91,6 +92,7 @@ export default function FinancePage() {
                   {cat.name}
                 </a>
               ))}
+              <div className="flex-shrink-0 w-20"></div>
             </div>
 
             {/* Right arrow - fixed width area */}
