@@ -63,7 +63,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           {/* Top Bar */}
           <div className="py-4 flex justify-between items-center">
-            <a href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
+            <a href="/zh-cn" className="text-4xl md:text-5xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </a>
             {/* Language Selector - Button + Dropdown Panel */}

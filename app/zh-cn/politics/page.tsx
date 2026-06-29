@@ -34,7 +34,7 @@ export default function PoliticsPage() {
       <header className="sticky top-0 z-50 border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="py-4 flex justify-between items-center">
-            <Link href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
+            <Link href="/zh-cn" className="text-4xl md:text-5xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </Link>
             <div className="relative">
