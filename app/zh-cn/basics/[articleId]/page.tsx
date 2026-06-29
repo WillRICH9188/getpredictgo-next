@@ -61,7 +61,7 @@ export default function ArticlePage({ params }: { params: { articleId: string } 
               {langMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-10">
                   {languages.map((lang) => (
-                    <a
+                    
                       key={lang.code}
                       href={`/${lang.code}/basics/${params.articleId}`}
                       className={`block px-4 py-2 text-sm transition-all ${
@@ -84,7 +84,7 @@ export default function ArticlePage({ params }: { params: { articleId: string } 
             </div>
             <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-2">
               {categories.map((cat) => (
-                <a
+                
                   key={cat.name}
                   href={cat.href}
                   className={`transition-colors font-medium ${
@@ -128,7 +128,7 @@ export default function ArticlePage({ params }: { params: { articleId: string } 
         </div>
 
         <div className="prose prose-invert max-w-none mb-12">
-          <div dangerouslySetInnerHTML={{ __html: article.content }} className="text-slate-200 leading-relaxed" />
+          <div dangerouslySetInnerHTML={{ __html: article.content }} className="text-slate-200 leading-relaxed space-y-4" />
         </div>
 
         <div className="border-t border-slate-700/50 pt-8 mt-12">
