@@ -89,7 +89,7 @@ export default function BasicsPage() {
             </div>
 
             {/* Scrollable indicator - always show on all devices */}
-            <div style={{position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#60a5fa', fontSize: '24px', pointerEvents: 'none', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'}}>›</div>
+            <div dangerouslySetInnerHTML={{__html: '<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #60a5fa; font-size: 24px; pointer-events: none; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;">›</div>'}} />
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-950 via-slate-950/70 to-transparent pointer-events-none md:hidden"></div>
           </nav>
         </div>
