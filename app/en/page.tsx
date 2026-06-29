@@ -105,7 +105,7 @@ export default function Home() {
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none transform -translate-y-1">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❮
             </div>
 
@@ -125,7 +125,7 @@ export default function Home() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none transform -translate-y-1">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❯
             </div>
           </nav>
