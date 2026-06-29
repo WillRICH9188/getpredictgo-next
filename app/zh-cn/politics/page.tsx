@@ -77,7 +77,6 @@ export default function PoliticsPage() {
 
             {/* Scrollable navigation area - flex-1 fills middle space */}
             <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-2">
-              <div className="flex-shrink-0 w-8"></div>
               {categories.map((cat) => (
                 <a
                   key={cat.name}
