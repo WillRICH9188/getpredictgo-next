@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const t = {
-  title: 'राजनीति',
-  description: 'दुनिया भर की भविष्यवाणी बाजारों से चुनाव की भविष्यवाणी, राजनीतिक परिणाम और शासन संबंधी पूर्वानुमान।',
-  subtitle: 'राजनीतिक पूर्वानुमान',
+  title: '其他',
+  description: '杂项预测，包括娱乐、科学、技术和独特的市场事件。',
+  subtitle: '超越主流',
 };
 
 const languages = [
@@ -16,25 +16,25 @@ const languages = [
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/zh-cn/basics', icon: '📚' },
+  { name: '如何参与', href: '/zh-cn/how-to', icon: '🎮' },
+  { name: '体育', href: '/zh-cn/sports', icon: '⚽' },
+  { name: '政治', href: '/zh-cn/politics', icon: '🏛️' },
+  { name: '金融', href: '/zh-cn/finance', icon: '💰' },
+  { name: '趋势数据', href: '/zh-cn/data', icon: '📊' },
+  { name: '其他', href: '/zh-cn/other', icon: '🔍' },
 ];
 
-export default function PoliticsPage() {
+export default function OtherPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const currentLang = languages.find(l => l.code === 'hi');
+  const currentLang = languages.find(l => l.code === 'zh-cn');
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       <header className="sticky top-0 z-50 border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="py-4 flex justify-between items-center">
-            <Link href="/hi" className="text-2xl md:text-3xl font-bold tracking-tight">
+            <Link href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </Link>
             <div className="relative">
@@ -53,9 +53,9 @@ export default function PoliticsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/politics`}
+                      href={`/${lang.code}/other`}
                       className={`block px-4 py-2 text-sm transition-all ${
-                        lang.code === 'hi'
+                        lang.code === 'zh-cn'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
                           : 'text-slate-300 hover:bg-slate-700/50'
                       }`}
@@ -71,7 +71,7 @@ export default function PoliticsPage() {
           {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
@@ -82,7 +82,7 @@ export default function PoliticsPage() {
                   key={cat.name}
                   href={cat.href}
                   className={`transition-colors font-medium ${
-                    cat.name === 'राजनीति'
+                    cat.name === '其他'
                       ? 'text-blue-400'
                       : 'text-slate-300 hover:text-blue-400'
                   }`}
@@ -95,7 +95,7 @@ export default function PoliticsPage() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❯
             </div>
           </nav>
@@ -104,9 +104,9 @@ export default function PoliticsPage() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
         <div className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/hi" className="hover:text-blue-400 transition-colors">होम</Link>
+          <Link href="/zh-cn" className="hover:text-blue-400 transition-colors">首页</Link>
           <span>/</span>
-          <span className="text-blue-400">राजनीति</span>
+          <span className="text-blue-400">其他</span>
         </div>
       </div>
 
@@ -134,34 +134,34 @@ export default function PoliticsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🗳️</div>
-            <h3 className="text-xl font-bold mb-3">चुनाव</h3>
+            <div className="text-4xl mb-4">🎬</div>
+            <h3 className="text-xl font-bold mb-3">娱乐</h3>
             <p className="text-slate-300 leading-relaxed">
-              दुनिया भर के प्रमुख चुनावों पर भविष्यवाणी, राष्ट्रपति, संसदीय और क्षेत्रीय प्रतियोगिताएं।
+              奖项预测、票房预测、流媒体热点和娱乐行业成果。
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏛️</div>
-            <h3 className="text-xl font-bold mb-3">विधान परिणाम</h3>
+            <div className="text-4xl mb-4">🔬</div>
+            <h3 className="text-xl font-bold mb-3">科学与技术</h3>
             <p className="text-slate-300 leading-relaxed">
-              विधेयक पारित होने, संसदीय नियंत्रण और नीति निर्णयों पर भविष्यवाणी।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="text-xl font-bold mb-3">राजनीतिक घटनाएं</h3>
-            <p className="text-slate-300 leading-relaxed">
-              सरकारी इस्तीफे, गठबंधन निर्माण और अन्य प्रमुख राजनीतिक विकास पर भविष्यवाणी।
+              科学突破、太空探索、人工智能发展和技术创新。
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
             <div className="text-4xl mb-4">🌍</div>
-            <h3 className="text-xl font-bold mb-3">वैश्विक राजनीति</h3>
+            <h3 className="text-xl font-bold mb-3">全球事件</h3>
             <p className="text-slate-300 leading-relaxed">
-              अंतरराष्ट्रीय संबंध, प्रतिबंध, संधि और राजनयिक परिणामों पर भविष्यवाणी।
+              自然灾害、环境趋势、人道主义事件和全球发展。
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-4xl mb-4">🎪</div>
+            <h3 className="text-xl font-bold mb-3">独特市场</h3>
+            <p className="text-slate-300 leading-relaxed">
+              利基预测、病毒事件、文化现象和非常规市场类别。
             </p>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function PoliticsPage() {
                 Telegram
               </a>
               <span>•</span>
-              <span>गोपनीयता नीति</span>
+              <span>隐私政策</span>
             </div>
           </div>
         </div>

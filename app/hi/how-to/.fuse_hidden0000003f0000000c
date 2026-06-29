@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const t = {
-  title: 'राजनीति',
-  description: 'दुनिया भर की भविष्यवाणी बाजारों से चुनाव की भविष्यवाणी, राजनीतिक परिणाम और शासन संबंधी पूर्वानुमान।',
-  subtitle: 'राजनीतिक पूर्वानुमान',
+  title: 'कैसे खेलें',
+  description: 'भविष्यवाणी बाजारों में भाग लेने, दांव लगाने और अपने पोर्टफोलियो का प्रबंधन करने के लिए चरण-दर-चरण गाइड।',
+  subtitle: 'आसानी से शुरुआत करें',
 };
 
 const languages = [
@@ -25,7 +25,7 @@ const categories = [
   { name: 'अन्य', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function PoliticsPage() {
+export default function HowToPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -53,7 +53,7 @@ export default function PoliticsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/politics`}
+                      href={`/${lang.code}/how-to`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'hi'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -71,7 +71,7 @@ export default function PoliticsPage() {
           {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
@@ -82,7 +82,7 @@ export default function PoliticsPage() {
                   key={cat.name}
                   href={cat.href}
                   className={`transition-colors font-medium ${
-                    cat.name === 'राजनीति'
+                    cat.name === 'कैसे खेलें'
                       ? 'text-blue-400'
                       : 'text-slate-300 hover:text-blue-400'
                   }`}
@@ -95,7 +95,7 @@ export default function PoliticsPage() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❯
             </div>
           </nav>
@@ -106,7 +106,7 @@ export default function PoliticsPage() {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/hi" className="hover:text-blue-400 transition-colors">होम</Link>
           <span>/</span>
-          <span className="text-blue-400">राजनीति</span>
+          <span className="text-blue-400">कैसे खेलें</span>
         </div>
       </div>
 
@@ -132,36 +132,32 @@ export default function PoliticsPage() {
           <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-8">
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🗳️</div>
-            <h3 className="text-xl font-bold mb-3">चुनाव</h3>
-            <p className="text-slate-300 leading-relaxed">
-              दुनिया भर के प्रमुख चुनावों पर भविष्यवाणी, राष्ट्रपति, संसदीय और क्षेत्रीय प्रतियोगिताएं।
+            <h3 className="text-2xl font-bold mb-4">🚀 शुरुआत करना</h3>
+            <p className="text-slate-300 leading-relaxed mb-4">
+              खाता बनाएं, अपनी पहचान सत्यापित करें और पहली जमा करें।
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏛️</div>
-            <h3 className="text-xl font-bold mb-3">विधान परिणाम</h3>
-            <p className="text-slate-300 leading-relaxed">
-              विधेयक पारित होने, संसदीय नियंत्रण और नीति निर्णयों पर भविष्यवाणी।
+            <h3 className="text-2xl font-bold mb-4">📈 पहला व्यापार</h3>
+            <p className="text-slate-300 leading-relaxed mb-4">
+              बाजार का चयन कैसे करें, संभावनाओं का विश्लेषण करें और आत्मविश्वास से भविष्यवाणी करें।
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="text-xl font-bold mb-3">राजनीतिक घटनाएं</h3>
-            <p className="text-slate-300 leading-relaxed">
-              सरकारी इस्तीफे, गठबंधन निर्माण और अन्य प्रमुख राजनीतिक विकास पर भविष्यवाणी।
+            <h3 className="text-2xl font-bold mb-4">💼 पोर्टफोलियो प्रबंधन</h3>
+            <p className="text-slate-300 leading-relaxed mb-4">
+              अपनी स्थिति को ट्रैक करें, जोखिम को प्रबंधित करें और दीर्घकालीन सफलता के लिए अनुकूलित करें।
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🌍</div>
-            <h3 className="text-xl font-bold mb-3">वैश्विक राजनीति</h3>
-            <p className="text-slate-300 leading-relaxed">
-              अंतरराष्ट्रीय संबंध, प्रतिबंध, संधि और राजनयिक परिणामों पर भविष्यवाणी।
+            <h3 className="text-2xl font-bold mb-4">🎓 उन्नत रणनीतियां</h3>
+            <p className="text-slate-300 leading-relaxed mb-4">
+              अनुभवी भविष्यवाणीकारों द्वारा उपयोग की जाने वाली पेशेवर तकनीकें खोजें।
             </p>
           </div>
         </div>

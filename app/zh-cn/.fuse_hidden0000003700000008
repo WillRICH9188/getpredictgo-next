@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 const t = {
-  title: 'दुनिया क्या भविष्यवाणी कर रही है यह समझें।',
-  subtitle: 'वैश्विक भविष्यवाणी बाजारों पर तटस्थ डेटा और विश्लेषण।',
-  cta: 'Telegram चैनल में जुड़ें',
-  latest: 'नवीनतम अंतर्दृष्टि',
-  readmore: 'अधिक पढ़ें',
+  title: '看懂全世界正在预测什么。',
+  subtitle: '中立解读全球预测市场——胜率、命中率、趋势，用数据说话。',
+  cta: '加入 Telegram 频道',
+  latest: '最新洞见',
+  readmore: '阅读更多',
 };
 
 const languages = [
@@ -17,37 +17,37 @@ const languages = [
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/zh-cn/basics', icon: '📚' },
+  { name: '如何参与', href: '/zh-cn/how-to', icon: '🎮' },
+  { name: '体育', href: '/zh-cn/sports', icon: '⚽' },
+  { name: '政治', href: '/zh-cn/politics', icon: '🏛️' },
+  { name: '金融', href: '/zh-cn/finance', icon: '💰' },
+  { name: '趋势数据', href: '/zh-cn/data', icon: '📊' },
+  { name: '其他', href: '/zh-cn/other', icon: '🔍' },
 ];
 
 const sampleArticles = [
   {
     id: 1,
-    title: 'बिटकॉइन मूल्य पूर्वानुमान: 2026 में बाजार की अपेक्षाएं',
-    description: 'क्रिप्टो भविष्यवाणी बाजार विश्लेषण बिटकॉइन के आने वाले वर्ष के मूल्य प्रक्षेपवक्र को दर्शाता है।',
-    category: 'वित्त',
+    title: '比特币价格预测：2026 年市场预期',
+    description: '加密货币预测市场分析显示比特币在未来一年的价格轨迹预期。',
+    category: '金融',
     categoryColor: 'bg-amber-500/20 text-amber-300',
     image: '💰',
   },
   {
     id: 2,
-    title: '2026 अमेरिकी चुनाव: प्रारंभिक विजयी मार और बाजार अंतर्दृष्टि',
-    description: 'आने वाले राष्ट्रपति चुनाव के लिए भविष्यवाणी बाजार की विजयी का व्यापक विश्लेषण।',
-    category: 'राजनीति',
+    title: '2026 美国大选：初期赔率和市场洞察',
+    description: '全面分析预测市场对即将举行的总统大选的赔率。',
+    category: '政治',
     categoryColor: 'bg-red-500/20 text-red-300',
     image: '🏛️',
   },
   {
     id: 3,
-    title: 'क्या अर्जेंटीना फिर से विश्व कप जीत सकता है?',
-    description: 'खेल भविष्यवाणी बाजार आने वाली टूर्नामेंट में अर्जेंटीना की संभावनाओं का विश्लेषण करता है।',
-    category: 'खेल',
+    title: '阿根廷能再次赢得世界杯吗？',
+    description: '体育预测市场分析阿根廷在即将举行的锦标赛中的机会。',
+    category: '体育',
     categoryColor: 'bg-blue-500/20 text-blue-300',
     image: '⚽',
   },
@@ -55,7 +55,7 @@ const sampleArticles = [
 
 export default function Home() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const currentLang = languages.find(l => l.code === 'hi');
+  const currentLang = languages.find(l => l.code === 'zh-cn');
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Header with Navigation */}
@@ -63,7 +63,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           {/* Top Bar */}
           <div className="py-4 flex justify-between items-center">
-            <a href="/hi" className="text-2xl md:text-3xl font-bold tracking-tight">
+            <a href="/zh-cn" className="text-2xl md:text-3xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </a>
             {/* Language Selector - Button + Dropdown Panel */}
@@ -87,7 +87,7 @@ export default function Home() {
                       key={lang.code}
                       href={`/${lang.code}`}
                       className={`block px-4 py-2 text-sm transition-all ${
-                        lang.code === 'hi'
+                        lang.code === 'zh-cn'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
                           : 'text-slate-300 hover:bg-slate-700/50'
                       }`}
@@ -104,7 +104,7 @@ export default function Home() {
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
@@ -124,7 +124,7 @@ export default function Home() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❯
             </div>
           </nav>
@@ -212,15 +212,15 @@ export default function Home() {
           <div className="grid grid-cols-3 gap-4 md:gap-8">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">3</div>
-              <div className="text-sm md:text-base text-slate-400">भाषाएं</div>
+              <div className="text-sm md:text-base text-slate-400">語言版本</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">100%</div>
-              <div className="text-sm md:text-base text-slate-400">मुफ्त पहुंच</div>
+              <div className="text-sm md:text-base text-slate-400">免費使用</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">लाइव</div>
-              <div className="text-sm md:text-base text-slate-400">बाजार डेटा</div>
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">實時</div>
+              <div className="text-sm md:text-base text-slate-400">市場數據</div>
             </div>
           </div>
         </div>
@@ -238,7 +238,7 @@ export default function Home() {
                 Telegram
               </a>
               <span>•</span>
-              <span>गोपनीयता नीति</span>
+              <span>隱私政策</span>
             </div>
           </div>
         </div>

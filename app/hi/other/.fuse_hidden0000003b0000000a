@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const t = {
-  title: 'राजनीति',
-  description: 'दुनिया भर की भविष्यवाणी बाजारों से चुनाव की भविष्यवाणी, राजनीतिक परिणाम और शासन संबंधी पूर्वानुमान।',
-  subtitle: 'राजनीतिक पूर्वानुमान',
+  title: 'अन्य',
+  description: 'मिश्रित भविष्यवाणी, मनोरंजन, विज्ञान, प्रौद्योगिकी और अद्वितीय बाजार घटनाओं सहित।',
+  subtitle: 'मुख्यधारा से परे',
 };
 
 const languages = [
@@ -25,7 +25,7 @@ const categories = [
   { name: 'अन्य', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function PoliticsPage() {
+export default function OtherPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -53,7 +53,7 @@ export default function PoliticsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/politics`}
+                      href={`/${lang.code}/other`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'hi'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -71,7 +71,7 @@ export default function PoliticsPage() {
           {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
@@ -82,7 +82,7 @@ export default function PoliticsPage() {
                   key={cat.name}
                   href={cat.href}
                   className={`transition-colors font-medium ${
-                    cat.name === 'राजनीति'
+                    cat.name === 'अन्य'
                       ? 'text-blue-400'
                       : 'text-slate-300 hover:text-blue-400'
                   }`}
@@ -95,7 +95,7 @@ export default function PoliticsPage() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-lg leading-none pointer-events-none">
+            <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❯
             </div>
           </nav>
@@ -106,7 +106,7 @@ export default function PoliticsPage() {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/hi" className="hover:text-blue-400 transition-colors">होम</Link>
           <span>/</span>
-          <span className="text-blue-400">राजनीति</span>
+          <span className="text-blue-400">अन्य</span>
         </div>
       </div>
 
@@ -134,34 +134,34 @@ export default function PoliticsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🗳️</div>
-            <h3 className="text-xl font-bold mb-3">चुनाव</h3>
+            <div className="text-4xl mb-4">🎬</div>
+            <h3 className="text-xl font-bold mb-3">मनोरंजन</h3>
             <p className="text-slate-300 leading-relaxed">
-              दुनिया भर के प्रमुख चुनावों पर भविष्यवाणी, राष्ट्रपति, संसदीय और क्षेत्रीय प्रतियोगिताएं।
+              पुरस्कार पूर्वानुमान, बॉक्स ऑफिस पूर्वानुमान, स्ट्रीमिंग हिट और मनोरंजन उद्योग परिणाम।
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏛️</div>
-            <h3 className="text-xl font-bold mb-3">विधान परिणाम</h3>
+            <div className="text-4xl mb-4">🔬</div>
+            <h3 className="text-xl font-bold mb-3">विज्ञान व तकनीक</h3>
             <p className="text-slate-300 leading-relaxed">
-              विधेयक पारित होने, संसदीय नियंत्रण और नीति निर्णयों पर भविष्यवाणी।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="text-xl font-bold mb-3">राजनीतिक घटनाएं</h3>
-            <p className="text-slate-300 leading-relaxed">
-              सरकारी इस्तीफे, गठबंधन निर्माण और अन्य प्रमुख राजनीतिक विकास पर भविष्यवाणी।
+              वैज्ञानिक सफलताएं, अंतरिक्ष अन्वेषण, कृत्रिम बुद्धिमत्ता और तकनीकी नवाचार।
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
             <div className="text-4xl mb-4">🌍</div>
-            <h3 className="text-xl font-bold mb-3">वैश्विक राजनीति</h3>
+            <h3 className="text-xl font-bold mb-3">वैश्विक घटनाएं</h3>
             <p className="text-slate-300 leading-relaxed">
-              अंतरराष्ट्रीय संबंध, प्रतिबंध, संधि और राजनयिक परिणामों पर भविष्यवाणी।
+              प्राकृतिक आपदाएं, पर्यावरणीय प्रवृत्तियां, मानवीय घटनाएं और वैश्विक विकास।
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
+            <div className="text-4xl mb-4">🎪</div>
+            <h3 className="text-xl font-bold mb-3">अनोखे बाजार</h3>
+            <p className="text-slate-300 leading-relaxed">
+              आला भविष्यवाणी, वायरल घटनाएं, सांस्कृतिक घटनाएं और गैर-मानक बाजार।
             </p>
           </div>
         </div>
