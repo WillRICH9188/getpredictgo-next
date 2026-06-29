@@ -4,20 +4,18 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { getArticle, getArticles } from '@/lib/articles';
 
-export default function ArticlePage({ params }: { params: { articleId: string } }) {
-  // 調試：打印參數
-  console.log('DEBUG - params:', params);
-  console.log('DEBUG - articleId:', params.articleId);
+export default async function ArticlePage({ params }: { params: Promise<{ articleId: string }> }) {
+  // 👈 加上 async 和 await
+  const { articleId } = await params;
   
-  const article = getArticle('zh-cn', 'basics', params.articleId);
-  console.log('DEBUG - article:', article);
+  const article = getArticle('zh-cn', 'basics', articleId);
+  const allArticles = getArticles('zh-cn', 'basics');
 
   if (!article) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">文章未找到</h1>
-          <p className="text-slate-400 mb-4">articleId: {params.articleId}</p>
           <Link href="/zh-cn/basics" className="text-blue-400 hover:text-blue-300">
             返回分类
           </Link>
@@ -26,5 +24,13 @@ export default function ArticlePage({ params }: { params: { articleId: string } 
     );
   }
 
-  return <div className="text-white p-8"><h1>{article.title}</h1><div dangerouslySetInnerHTML={{ __html: article.content }} /></div>;
+  return (
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 w-full">
+        <h1 className="text-4xl md:text-5xl font-black mb-4">{article.title}</h1>
+        <p className="text-lg text-slate-300 mb-8">{article.description}</p>
+        <div dangerouslySetInnerHTML={{ __html: article.content }} className="text-slate-200 leading-relaxed space-y-4" />
+      </div>
+    </div>
+  );
 }
