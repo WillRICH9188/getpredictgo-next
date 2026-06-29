@@ -69,7 +69,10 @@ export default function BasicsPage() {
             </div>
           </div>
           {/* Category Navigation with Fade Effect */}
-          <nav className="border-t border-slate-700/50 py-4 relative" style={{position: 'relative'}} data-chevron="true">
+          <nav className="border-t border-slate-700/50 py-4 relative">
+            {/* Left arrow - mobile only */}
+            <div className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none">❮</div>
+
             {/* Navigation scroll container with fade effect */}
             <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto">
               {categories.map((cat) => (
@@ -88,8 +91,8 @@ export default function BasicsPage() {
               ))}
             </div>
 
-            {/* Scrollable indicator - always show on all devices */}
-            <div dangerouslySetInnerHTML={{__html: '<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #60a5fa; font-size: 24px; pointer-events: none; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;">›</div>'}} />
+            {/* Right arrow - mobile only */}
+            <div className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none">❯</div>
           </nav>
         </div>
       </header>

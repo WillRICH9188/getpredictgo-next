@@ -102,8 +102,11 @@ export default function Home() {
           </div>
 
           {/* Category Navigation */}
-          <nav className="border-t border-slate-700/50 py-4 overflow-x-auto">
-            <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal">
+          <nav className="border-t border-slate-700/50 py-4 relative">
+            {/* Left arrow - mobile only */}
+            <div className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none">❮</div>
+
+            <div className="flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap md:whitespace-normal overflow-x-auto">
               {categories.map((cat) => (
                 <a
                   key={cat.name}
@@ -115,6 +118,9 @@ export default function Home() {
                 </a>
               ))}
             </div>
+
+            {/* Right arrow - mobile only */}
+            <div className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl pointer-events-none">❯</div>
           </nav>
         </div>
       </header>
