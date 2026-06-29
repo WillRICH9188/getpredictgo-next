@@ -69,14 +69,14 @@ export default function HowToPage() {
             </div>
           </div>
           {/* Category Navigation with Fade Effect */}
-          <nav className="border-t border-slate-700/50 py-2 relative flex items-center">
+          <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
             {/* Scrollable navigation area - flex-1 fills middle space */}
-            <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2">
+            <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 justify-center px-4">
               {categories.map((cat) => (
                 <a
                   key={cat.name}
