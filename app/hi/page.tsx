@@ -104,7 +104,7 @@ export default function Home() {
           {/* Category Navigation */}
           <nav className="border-t border-slate-700/50 py-4 relative flex items-center">
             {/* Left arrow - fixed width area */}
-            <div className="md:hidden w-8 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
+            <div className="md:hidden w-6 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❮
             </div>
 
@@ -123,7 +123,7 @@ export default function Home() {
             </div>
 
             {/* Right arrow - fixed width area */}
-            <div className="md:hidden w-8 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
+            <div className="md:hidden w-6 flex-shrink-0 flex items-center justify-center text-blue-400 text-2xl pointer-events-none">
               ❯
             </div>
           </nav>
