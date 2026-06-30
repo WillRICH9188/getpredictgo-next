@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'कैसे खेलें',
-  description: 'भविष्यवाणी बाजारों में भाग लेने, दांव लगाने और अपने पोर्टफोलियो का प्रबंधन करने के लिए चरण-दर-चरण गाइड।',
-  subtitle: 'आसानी से शुरुआत करें',
+  description: 'भविष्य बाजारों में भाग लेने के आवश्यक सिद्धांतों को सीखें।',
+  subtitle: 'भविष्य भाग लेना में महारत',
 };
+
+const articles = getArticles('hi', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'hi', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/hi/basics', icon: '📚' },
+  { name: '如何参与', href: '/hi/how-to', icon: '🎮' },
+  { name: '体育', href: '/hi/sports', icon: '⚽' },
+  { name: '政治', href: '/hi/politics', icon: '🏛️' },
+  { name: '金融', href: '/hi/finance', icon: '💰' },
+  { name: '趋势数据', href: '/hi/data', icon: '📊' },
+  { name: '其他', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function HowToPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -53,7 +56,7 @@ export default function HowToPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/how-to`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'hi'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -132,34 +135,20 @@ export default function HowToPage() {
           <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
         </div>
 
-        <div className="space-y-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">🚀 शुरुआत करना</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
-              खाता बनाएं, अपनी पहचान सत्यापित करें और पहली जमा करें।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">📈 पहला व्यापार</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
-              बाजार का चयन कैसे करें, संभावनाओं का विश्लेषण करें और आत्मविश्वास से भविष्यवाणी करें।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">💼 पोर्टफोलियो प्रबंधन</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
-              अपनी स्थिति को ट्रैक करें, जोखिम को प्रबंधित करें और दीर्घकालीन सफलता के लिए अनुकूलित करें।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4">🎓 उन्नत रणनीतियां</h3>
-            <p className="text-slate-300 leading-relaxed mb-4">
-              अनुभवी भविष्यवाणीकारों द्वारा उपयोग की जाने वाली पेशेवर तकनीकें खोजें।
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/hi/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

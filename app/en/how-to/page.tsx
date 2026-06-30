@@ -2,44 +2,44 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'How to Play',
-  description: 'Step-by-step guides on participating in prediction markets, placing bets, and managing your portfolio.',
-  subtitle: 'Get started easily',
+  description: 'Learn the essentials of participating in prediction markets.',
+  subtitle: 'Master prediction participation',
 };
+
+const articles = getArticles('en', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'en', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'Basics', href: '/en/basics', icon: '📚' },
-  { name: 'How to Play', href: '/en/how-to', icon: '🎮' },
-  { name: 'Sports', href: '/en/sports', icon: '⚽' },
-  { name: 'Politics', href: '/en/politics', icon: '🏛️' },
-  { name: 'Finance', href: '/en/finance', icon: '💰' },
-  { name: 'Trend Data', href: '/en/data', icon: '📊' },
-  { name: 'Other', href: '/en/other', icon: '🔍' },
+  { name: 'How to Play', href: '/en/basics', icon: '📚' },
+  { name: '如何参与', href: '/en/how-to', icon: '🎮' },
+  { name: '体育', href: '/en/sports', icon: '⚽' },
+  { name: '政治', href: '/en/politics', icon: '🏛️' },
+  { name: '金融', href: '/en/finance', icon: '💰' },
+  { name: '趋势数据', href: '/en/data', icon: '📊' },
+  { name: '其他', href: '/en/other', icon: '🔍' },
 ];
 
-export default function HowToPage() {
+export default function BasicsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
-      {/* Header with Navigation */}
       <header className="sticky top-0 z-50 border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          {/* Top Bar */}
           <div className="py-4 flex justify-between items-center">
             <Link href="/en" className="text-4xl md:text-5xl font-bold tracking-tight">
               Predict <span className="text-blue-400">Go</span>
             </Link>
-            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
@@ -51,13 +51,12 @@ export default function HowToPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </button>
-
               {langMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg py-2 z-10">
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/how-to`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -72,7 +71,6 @@ export default function HowToPage() {
               )}
             </div>
           </div>
-
           {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
             {/* Left arrow - fixed width area */}
@@ -107,7 +105,6 @@ export default function HowToPage() {
         </div>
       </header>
 
-      {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/en" className="hover:text-blue-400 transition-colors">Home</Link>
@@ -116,69 +113,45 @@ export default function HowToPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-slate-900 via-blue-950/20 to-slate-950 border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <div className="flex justify-center mb-8">
             <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
           </div>
-
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
               {t.title}
             </span>
           </h1>
-
           <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             {t.description}
           </p>
         </div>
       </section>
 
-      {/* Content Section */}
       <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-6 w-full flex-1">
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">{t.subtitle}</h2>
           <div className="h-1 w-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
         </div>
 
-        {/* Content Placeholder */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🚀</div>
-            <h3 className="text-xl font-bold mb-3">Getting Started</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Create your account, verify your identity, and make your first deposit. Follow our comprehensive guide to set up your prediction market portfolio.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📈</div>
-            <h3 className="text-xl font-bold mb-3">Placing Your First Trade</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Learn how to select markets, analyze probabilities, and place your first prediction with confidence.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">💼</div>
-            <h3 className="text-xl font-bold mb-3">Portfolio Management</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Track your positions, manage risk, and optimize your prediction portfolio for long-term success.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🎓</div>
-            <h3 className="text-xl font-bold mb-3">Advanced Strategies</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Discover professional techniques used by experienced predictors to maximize returns and minimize risk.
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/en/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t border-slate-700/50 bg-slate-950/50 px-4 md:px-6 py-8 md:py-12 mt-16">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">

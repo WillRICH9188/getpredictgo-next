@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'खेल',
-  description: 'दुनिया भर की प्रमुख खेल घटनाओं, टूर्नामेंटों और एथलेटिक प्रतियोगिताओं के लिए भविष्यवाणी बाजार।',
-  subtitle: 'मुख्य खेल पूर्वानुमान',
+  description: 'विशेषज्ञ विश्लेषण और वास्तविक समय सट्टेबाजी विषमताओं के साथ खेल भविष्यवाणी।',
+  subtitle: 'खेल पूर्वानुमान मार्गदर्शन',
 };
+
+const articles = getArticles('hi', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'hi', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/hi/basics', icon: '📚' },
+  { name: '如何参与', href: '/hi/how-to', icon: '🎮' },
+  { name: '体育', href: '/hi/sports', icon: '⚽' },
+  { name: '政治', href: '/hi/politics', icon: '🏛️' },
+  { name: '金融', href: '/hi/finance', icon: '💰' },
+  { name: '趋势数据', href: '/hi/data', icon: '📊' },
+  { name: '其他', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function SportsPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -53,7 +56,7 @@ export default function SportsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/sports`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'hi'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -133,37 +136,19 @@ export default function SportsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏆</div>
-            <h3 className="text-xl font-bold mb-3">विश्व कप</h3>
-            <p className="text-slate-300 leading-relaxed">
-              फीफा विश्व कप की भविष्यवाणी, टूर्नामेंट विजेता और व्यक्तिगत खिलाड़ी की उपलब्धियाँ।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏀</div>
-            <h3 className="text-xl font-bold mb-3">बास्केटबॉल</h3>
-            <p className="text-slate-300 leading-relaxed">
-              एनबीए की भविष्यवाणी, सीजन चैम्पियनशिप, प्लेऑफ परिणाम और खिलाड़ी प्रदर्शन।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏈</div>
-            <h3 className="text-xl font-bold mb-3">अमेरिकी फुटबॉल</h3>
-            <p className="text-slate-300 leading-relaxed">
-              सुपर बाउल की भविष्यवाणी और एनएफएल सीजन के परिणाम।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">⚾</div>
-            <h3 className="text-xl font-bold mb-3">अन्य खेल</h3>
-            <p className="text-slate-300 leading-relaxed">
-              टेनिस, क्रिकेट, मुक्केबाजी, साइकिल चलाना और अन्य विश्वव्यापी खेल आयोजन।
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/hi/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

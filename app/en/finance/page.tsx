@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'Finance',
-  description: 'Financial market predictions including crypto, stocks, commodities, and economic forecasts.',
+  description: 'Explore financial markets and investment predictions.',
   subtitle: 'Financial market insights',
 };
 
+const articles = getArticles('en', 'basics');
+
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'en', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'Basics', href: '/en/basics', icon: '📚' },
-  { name: 'How to Play', href: '/en/how-to', icon: '🎮' },
-  { name: 'Sports', href: '/en/sports', icon: '⚽' },
-  { name: 'Politics', href: '/en/politics', icon: '🏛️' },
-  { name: 'Finance', href: '/en/finance', icon: '💰' },
-  { name: 'Trend Data', href: '/en/data', icon: '📊' },
-  { name: 'Other', href: '/en/other', icon: '🔍' },
+  { name: 'Finance', href: '/en/basics', icon: '📚' },
+  { name: '如何参与', href: '/en/how-to', icon: '🎮' },
+  { name: '体育', href: '/en/sports', icon: '⚽' },
+  { name: '政治', href: '/en/politics', icon: '🏛️' },
+  { name: '金融', href: '/en/finance', icon: '💰' },
+  { name: '趋势数据', href: '/en/data', icon: '📊' },
+  { name: '其他', href: '/en/other', icon: '🔍' },
 ];
 
-export default function FinancePage() {
+export default function BasicsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
@@ -53,7 +56,7 @@ export default function FinancePage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/finance`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -133,37 +136,19 @@ export default function FinancePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">₿</div>
-            <h3 className="text-xl font-bold mb-3">Cryptocurrency</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Bitcoin, Ethereum, and other crypto asset price predictions and market developments.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📈</div>
-            <h3 className="text-xl font-bold mb-3">Stock Markets</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Predictions on major indices, individual stocks, and equity market movements.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🌾</div>
-            <h3 className="text-xl font-bold mb-3">Commodities</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Oil, gold, agricultural products, and other commodity price predictions.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">💱</div>
-            <h3 className="text-xl font-bold mb-3">Economics</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Inflation rates, interest rate decisions, employment data, and macroeconomic forecasts.
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/en/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

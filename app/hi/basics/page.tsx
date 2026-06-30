@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'मूल बातें',
-  description: 'भविष्यवाणी बाजार, ऑड्स और वैश्विक पूर्वानुमान कैसे काम करता है यह समझें।',
-  subtitle: 'बुनियादी बातें जानें',
+  description: 'भविष्य बाजार, सट्टेबाजी विषमताओं और वैश्विक पूर्वानुमान के मूल सिद्धांतों को समझें।',
+  subtitle: 'आवश्यकताओं को सीखें',
 };
+
+const articles = getArticles('hi', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'hi', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/hi/basics', icon: '📚' },
+  { name: '如何参与', href: '/hi/how-to', icon: '🎮' },
+  { name: '体育', href: '/hi/sports', icon: '⚽' },
+  { name: '政治', href: '/hi/politics', icon: '🏛️' },
+  { name: '金融', href: '/hi/finance', icon: '💰' },
+  { name: '趋势数据', href: '/hi/data', icon: '📊' },
+  { name: '其他', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function BasicsPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -133,37 +136,19 @@ export default function BasicsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📚</div>
-            <h3 className="text-xl font-bold mb-3">भविष्यवाणी बाजार क्या है?</h3>
-            <p className="text-slate-300 leading-relaxed">
-              भविष्यवाणी बाजार कैसे काम करते हैं, उनका इतिहास और भविष्य की घटनाओं को समझने के लिए यह क्यों मूल्यवान है इसकी खोज करें।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-xl font-bold mb-3">ऑड्स को समझना</h3>
-            <p className="text-slate-300 leading-relaxed">
-              भविष्यवाणी बाजारों में प्रयुक्त विभिन्न ऑड्स सिस्टम में महारत हासिल करें, दशमलव ऑड्स, भिन्नात्मक ऑड्स सहित।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🎯</div>
-            <h3 className="text-xl font-bold mb-3">कैसे शुरू करें</h3>
-            <p className="text-slate-300 leading-relaxed">
-              भविष्यवाणी बाजार में भाग लेने के लिए आपके पहले कदम। खाता सेटअप, बाजार चयन के बारे में जानें।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">💡</div>
-            <h3 className="text-xl font-bold mb-3">सामान्य गलतियाँ</h3>
-            <p className="text-slate-300 leading-relaxed">
-              अन्य के अनुभव से सीखें। भविष्यवाणी बाजारों के साथ शुरुआत करते समय सामान्य नुकसान और गलतफहमी को समझें।
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/hi/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

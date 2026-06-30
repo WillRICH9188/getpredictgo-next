@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'Trend Data',
-  description: 'Market data, statistics, and trend analysis from prediction markets across all categories.',
-  subtitle: 'Data-driven insights',
+  description: 'Analyze trends and historical data to make informed predictions.',
+  subtitle: 'Data-driven trends',
 };
+
+const articles = getArticles('en', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'en', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'Basics', href: '/en/basics', icon: '📚' },
-  { name: 'How to Play', href: '/en/how-to', icon: '🎮' },
-  { name: 'Sports', href: '/en/sports', icon: '⚽' },
-  { name: 'Politics', href: '/en/politics', icon: '🏛️' },
-  { name: 'Finance', href: '/en/finance', icon: '💰' },
-  { name: 'Trend Data', href: '/en/data', icon: '📊' },
-  { name: 'Other', href: '/en/other', icon: '🔍' },
+  { name: 'Trend Data', href: '/en/basics', icon: '📚' },
+  { name: '如何参与', href: '/en/how-to', icon: '🎮' },
+  { name: '体育', href: '/en/sports', icon: '⚽' },
+  { name: '政治', href: '/en/politics', icon: '🏛️' },
+  { name: '金融', href: '/en/finance', icon: '💰' },
+  { name: '趋势数据', href: '/en/data', icon: '📊' },
+  { name: '其他', href: '/en/other', icon: '🔍' },
 ];
 
-export default function DataPage() {
+export default function BasicsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
@@ -53,7 +56,7 @@ export default function DataPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/data`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -133,37 +136,19 @@ export default function DataPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-xl font-bold mb-3">Market Statistics</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Current odds, trading volumes, and liquidity metrics across all active prediction markets.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📈</div>
-            <h3 className="text-xl font-bold mb-3">Price Trends</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Historical price movements and probability changes over time across prediction markets.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🔍</div>
-            <h3 className="text-xl font-bold mb-3">Market Analysis</h3>
-            <p className="text-slate-300 leading-relaxed">
-              In-depth analysis of market movements, sentiment shifts, and prediction accuracy metrics.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📉</div>
-            <h3 className="text-xl font-bold mb-3">Performance Reports</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Detailed reports on prediction accuracy, market performance, and historical outcomes.
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/en/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

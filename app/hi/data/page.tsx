@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'ट्रेंड डेटा',
-  description: 'सभी श्रेणियों के भविष्यवाणी बाजारों से बाजार डेटा, सांख्यिकी और ट्रेंड विश्लेषण।',
-  subtitle: 'डेटा-संचालित अंतर्दृष्टि',
+  description: 'सूचित भविष्यवाणी करने के लिए प्रवृत्तियों और ऐतिहासिक डेटा का विश्लेषण करें।',
+  subtitle: 'डेटा-संचालित प्रवृत्तियां',
 };
+
+const articles = getArticles('hi', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'hi', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
-  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
-  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
-  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
-  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
-  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
-  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
+  { name: '基础知识', href: '/hi/basics', icon: '📚' },
+  { name: '如何参与', href: '/hi/how-to', icon: '🎮' },
+  { name: '体育', href: '/hi/sports', icon: '⚽' },
+  { name: '政治', href: '/hi/politics', icon: '🏛️' },
+  { name: '金融', href: '/hi/finance', icon: '💰' },
+  { name: '趋势数据', href: '/hi/data', icon: '📊' },
+  { name: '其他', href: '/hi/other', icon: '🔍' },
 ];
 
-export default function DataPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'hi');
 
@@ -53,7 +56,7 @@ export default function DataPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/data`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'hi'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -133,37 +136,19 @@ export default function DataPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-xl font-bold mb-3">बाजार सांख्यिकी</h3>
-            <p className="text-slate-300 leading-relaxed">
-              सभी सक्रिय भविष्यवाणी बाजारों में वर्तमान ऑड्स, ट्रेडिंग वॉल्यूम और तरलता।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📈</div>
-            <h3 className="text-xl font-bold mb-3">मूल्य ट्रेंड</h3>
-            <p className="text-slate-300 leading-relaxed">
-              भविष्यवाणी बाजारों में ऐतिहासिक मूल्य आंदोलन और संभावना परिवर्तन।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🔍</div>
-            <h3 className="text-xl font-bold mb-3">बाजार विश्लेषण</h3>
-            <p className="text-slate-300 leading-relaxed">
-              बाजार आंदोलन, भावनात्मक परिवर्तन और भविष्यवाणी सटीकता की गहन विश्लेषण।
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">📉</div>
-            <h3 className="text-xl font-bold mb-3">प्रदर्शन रिपोर्ट</h3>
-            <p className="text-slate-300 leading-relaxed">
-              भविष्यवाणी सटीकता, बाजार प्रदर्शन और ऐतिहासिक परिणामों पर विस्तृत रिपोर्टें।
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/hi/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -2,30 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { getArticles } from '@/lib/articles';
 
 const t = {
   title: 'Sports',
-  description: 'Prediction markets for major sports events, tournaments, and athletic competitions worldwide.',
-  subtitle: 'Major sports predictions',
+  description: 'Master sports predictions with expert analysis and real-time betting odds.',
+  subtitle: 'Sports forecasting guide',
 };
+
+const articles = getArticles('en', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
+  { code: 'en', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'Basics', href: '/en/basics', icon: '📚' },
-  { name: 'How to Play', href: '/en/how-to', icon: '🎮' },
-  { name: 'Sports', href: '/en/sports', icon: '⚽' },
-  { name: 'Politics', href: '/en/politics', icon: '🏛️' },
-  { name: 'Finance', href: '/en/finance', icon: '💰' },
-  { name: 'Trend Data', href: '/en/data', icon: '📊' },
-  { name: 'Other', href: '/en/other', icon: '🔍' },
+  { name: 'Sports', href: '/en/basics', icon: '📚' },
+  { name: '如何参与', href: '/en/how-to', icon: '🎮' },
+  { name: '体育', href: '/en/sports', icon: '⚽' },
+  { name: '政治', href: '/en/politics', icon: '🏛️' },
+  { name: '金融', href: '/en/finance', icon: '💰' },
+  { name: '趋势数据', href: '/en/data', icon: '📊' },
+  { name: '其他', href: '/en/other', icon: '🔍' },
 ];
 
-export default function SportsPage() {
+export default function BasicsPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
@@ -53,7 +56,7 @@ export default function SportsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/sports`}
+                      href={`/${lang.code}/basics`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -133,37 +136,19 @@ export default function SportsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏆</div>
-            <h3 className="text-xl font-bold mb-3">World Cup</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Predictions on the FIFA World Cup, including tournament winners, finalist predictions, and individual player achievements.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏀</div>
-            <h3 className="text-xl font-bold mb-3">NBA & Basketball</h3>
-            <p className="text-slate-300 leading-relaxed">
-              NBA predictions covering season championships, playoff outcomes, and individual player performance metrics.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">🏈</div>
-            <h3 className="text-xl font-bold mb-3">American Football</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Super Bowl predictions, seasonal outcomes, and playoff projections for the NFL.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300">
-            <div className="text-4xl mb-4">⚾</div>
-            <h3 className="text-xl font-bold mb-3">More Sports</h3>
-            <p className="text-slate-300 leading-relaxed">
-              Tennis, cricket, boxing, cycling, and other global sports events with prediction markets.
-            </p>
-          </div>
+          {articles.map((article) => (
+            <Link
+              key={article.id}
+              href={`/en/basics/${article.id}`}
+              className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
+            >
+              <div className="text-4xl mb-4">{article.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{article.title}</h3>
+              <p className="text-slate-300 leading-relaxed">
+                {article.description}
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
 
