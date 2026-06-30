@@ -115,7 +115,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ articl
 
 function ArticleHeader({ articleId }: { articleId: string }) {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const currentLang = languages.find(l => l.code === 'zh-cn');
+  const currentLang = languages.find(l => l.code === 'en');
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md">
@@ -142,7 +142,7 @@ function ArticleHeader({ articleId }: { articleId: string }) {
                     key={lang.code}
                     href={`/${lang.code}/basics/${articleId}`}
                     className={`block px-4 py-2 text-sm transition-all ${
-                      lang.code === 'zh-cn'
+                      lang.code === 'en'
                         ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
                         : 'text-slate-300 hover:bg-slate-700/50'
                     }`}
@@ -167,7 +167,7 @@ function ArticleHeader({ articleId }: { articleId: string }) {
                 key={cat.name}
                 href={cat.href}
                 className={`transition-colors font-medium ${
-                  cat.name === '基础知识'
+                  cat.name === 'Basics'
                     ? 'text-blue-400'
                     : 'text-slate-300 hover:text-blue-400'
                 }`}
