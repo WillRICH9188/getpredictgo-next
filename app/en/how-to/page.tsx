@@ -57,6 +57,10 @@ export default function CategoryPage() {
                     <a
                       key={lang.code}
                       href={`/${lang.code}/how-to`}
+
+              onClick={() => {
+                localStorage.setItem('predictor-lang', lang.code);
+              }}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
