@@ -10,25 +10,25 @@ const t = {
   subtitle: 'Data-driven trends',
 };
 
-const articles = getArticles('en', 'basics');
+const articles = getArticles('en', 'data');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'en', name: '中文', flag: '🇨🇳' },
+  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: 'Trend Data', href: '/en/basics', icon: '📚' },
-  { name: '如何参与', href: '/en/how-to', icon: '🎮' },
-  { name: '体育', href: '/en/sports', icon: '⚽' },
-  { name: '政治', href: '/en/politics', icon: '🏛️' },
-  { name: '金融', href: '/en/finance', icon: '💰' },
-  { name: '趋势数据', href: '/en/data', icon: '📊' },
-  { name: '其他', href: '/en/other', icon: '🔍' },
+  { name: 'Basics', href: '/en/basics', icon: '📚' },
+  { name: 'How to Play', href: '/en/how-to', icon: '🎮' },
+  { name: 'Sports', href: '/en/sports', icon: '⚽' },
+  { name: 'Politics', href: '/en/politics', icon: '🏛️' },
+  { name: 'Finance', href: '/en/finance', icon: '💰' },
+  { name: 'Trend Data', href: '/en/data', icon: '📊' },
+  { name: 'Other', href: '/en/other', icon: '🔍' },
 ];
 
-export default function BasicsPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
@@ -56,7 +56,7 @@ export default function BasicsPage() {
                   {languages.map((lang) => (
                     <a
                       key={lang.code}
-                      href={`/${lang.code}/basics`}
+                      href={`/${lang.code}/data`}
                       className={`block px-4 py-2 text-sm transition-all ${
                         lang.code === 'en'
                           ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400'
@@ -71,14 +71,10 @@ export default function BasicsPage() {
               )}
             </div>
           </div>
-          {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
-            {/* Left arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❮
             </div>
-
-            {/* Scrollable navigation area - flex-1 fills middle space */}
             <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-2">
               {categories.map((cat) => (
                 <a
@@ -96,8 +92,6 @@ export default function BasicsPage() {
               ))}
               <div className="flex-shrink-0 w-8"></div>
             </div>
-
-            {/* Right arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❯
             </div>
@@ -109,7 +103,7 @@ export default function BasicsPage() {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/en" className="hover:text-blue-400 transition-colors">Home</Link>
           <span>/</span>
-          <span className="text-blue-400">Trend Data</span>
+          <span className="text-blue-400">{t.title}</span>
         </div>
       </div>
 
@@ -139,7 +133,7 @@ export default function BasicsPage() {
           {articles.map((article) => (
             <Link
               key={article.id}
-              href={`/en/basics/${article.id}`}
+              href={`/en/data/${article.id}`}
               className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-8 hover:border-blue-500/50 transition-all duration-300 hover:bg-slate-800/70 cursor-pointer"
             >
               <div className="text-4xl mb-4">{article.icon}</div>

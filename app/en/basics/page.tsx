@@ -28,7 +28,7 @@ const categories = [
   { name: 'Other', href: '/en/other', icon: '🔍' },
 ];
 
-export default function BasicsPage() {
+export default function CategoryPage() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const currentLang = languages.find(l => l.code === 'en');
 
@@ -103,7 +103,7 @@ export default function BasicsPage() {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/en" className="hover:text-blue-400 transition-colors">Home</Link>
           <span>/</span>
-          <span className="text-blue-400">Basics</span>
+          <span className="text-blue-400">{t.title}</span>
         </div>
       </div>
 

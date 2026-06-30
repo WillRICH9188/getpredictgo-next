@@ -14,18 +14,18 @@ const articles = getArticles('hi', 'basics');
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'hi', name: '中文', flag: '🇨🇳' },
+  { code: 'zh-cn', name: '中文', flag: '🇨🇳' },
   { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
 ];
 
 const categories = [
-  { name: '基础知识', href: '/hi/basics', icon: '📚' },
-  { name: '如何参与', href: '/hi/how-to', icon: '🎮' },
-  { name: '体育', href: '/hi/sports', icon: '⚽' },
-  { name: '政治', href: '/hi/politics', icon: '🏛️' },
-  { name: '金融', href: '/hi/finance', icon: '💰' },
-  { name: '趋势数据', href: '/hi/data', icon: '📊' },
-  { name: '其他', href: '/hi/other', icon: '🔍' },
+  { name: 'मूल बातें', href: '/hi/basics', icon: '📚' },
+  { name: 'कैसे खेलें', href: '/hi/how-to', icon: '🎮' },
+  { name: 'खेल', href: '/hi/sports', icon: '⚽' },
+  { name: 'राजनीति', href: '/hi/politics', icon: '🏛️' },
+  { name: 'वित्त', href: '/hi/finance', icon: '💰' },
+  { name: 'ट्रेंड डेटा', href: '/hi/data', icon: '📊' },
+  { name: 'अन्य', href: '/hi/other', icon: '🔍' },
 ];
 
 export default function CategoryPage() {
@@ -71,14 +71,10 @@ export default function CategoryPage() {
               )}
             </div>
           </div>
-          {/* Category Navigation with Fade Effect */}
           <nav className="border-t border-slate-700/50 py-2 relative flex items-center gap-2">
-            {/* Left arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❮
             </div>
-
-            {/* Scrollable navigation area - flex-1 fills middle space */}
             <div className="flex-1 flex gap-6 md:gap-8 text-sm md:text-base whitespace-nowrap overflow-x-auto pb-2 px-2">
               {categories.map((cat) => (
                 <a
@@ -96,8 +92,6 @@ export default function CategoryPage() {
               ))}
               <div className="flex-shrink-0 w-8"></div>
             </div>
-
-            {/* Right arrow - fixed width area */}
             <div className="md:hidden w-4 flex-shrink-0 flex items-center justify-center text-blue-400 text-xl leading-none pointer-events-none transform -translate-y-1">
               ❯
             </div>
@@ -109,7 +103,7 @@ export default function CategoryPage() {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/hi" className="hover:text-blue-400 transition-colors">होम</Link>
           <span>/</span>
-          <span className="text-blue-400">मूल बातें</span>
+          <span className="text-blue-400">{t.title}</span>
         </div>
       </div>
 
